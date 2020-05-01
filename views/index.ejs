@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>COMPLAIN _BOX</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+html {
+  background-color: #56baed;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+}
+
+a {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  margin: 40px 8px 10px 8px; 
+  color: #cccccc;
+}
+
+
+
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+
+
+h2.inactive {
+  color: #cccccc;
+}
+
+h2.active {
+  color: #0d0d0d;
+  border-bottom: 2px solid #5fbae9;
+}
+
+
+
+
+input[type=button], input[type=submit], input[type=reset]  {
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  background-color: #39ace7;
+}
+
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+input[type=email] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=email]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=email]:placeholder {
+  color: #cccccc;
+}
+
+input[type=password] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=password]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=password]:placeholder {
+  color: #cccccc;
+}
+
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fadeIn {
+  opacity:0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.6s;
+  -moz-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.8s;
+  -moz-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}
+
+
+
+
+*:focus {
+    outline: none;
+} 
+
+#icon {
+  width:60%;
+}
+
+</style>
+</head>
+<body onload="getStats()">
+<script>
+  var a = ["","One","Two",'Three','Four', 'Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+
+  function inWords (num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
+    return str;
+  }
+
+   var pno,ano,rno;
+  function getStats(){
+
+    $('#chartdiv').css("display", "none");
+    $('#loader').css("display", "block");
+    $('#pendingpart').css("display", "none");
+    $('#activepart').css("display", "none");
+    $('#resolvedpart').css("display", "none");
+    $('#addComplain').css("display", "none");
+    const body = { a: 1 };
+    fetch('/getStat', {
+        method: 'post',
+        body:    JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(function(res){return res.json()})
+    .then(function(data){
+      pno = parseInt(data[0].pendingno);
+      ano = parseInt(data[1].activeno);
+      rno = parseInt(data[2].resolvedno);
+      am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv", am4charts.PieChart);
+chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+var chartReg = {};
+function createChart(chartdiv, charttype) {
+  // Check if the chart instance exists
+   maybeDisposeChart(chartdiv);
+
+  // Create new chart
+   chartReg[chartdiv] = am4core.create(chartdiv, charttype);
+   return chartReg[chartdiv];
+}
+
+function maybeDisposeChart(chartdiv) {
+  if (chartReg[chartdiv]) {
+    chartReg[chartdiv].dispose();
+    delete chartReg[chartdiv];
+  }
+}
+console.log(pno);
+      console.log(ano);
+      console.log(rno);
+chart.data = [
+  {
+    complain: "PENDING",
+    value: parseInt(pno)
+  },
+  {
+    complain: "ACTIVE",
+    value: parseInt(ano)
+  },
+  {
+    complain: "RESOLVED",
+    value: parseInt(rno)
+  }
+];
+chart.radius = am4core.percent(70);
+chart.innerRadius = am4core.percent(40);
+chart.startAngle = 180;
+chart.endAngle = 360;  
+
+var series = chart.series.push(new am4charts.PieSeries());
+series.dataFields.value = "value";
+series.dataFields.category = "complain";
+
+series.slices.template.cornerRadius = 10;
+series.slices.template.innerCornerRadius = 7;
+series.slices.template.draggable = true;
+series.slices.template.inert = true;
+series.alignLabels = false;
+
+series.hiddenState.properties.startAngle = 90;
+series.hiddenState.properties.endAngle = 90;
+
+chart.legend = new am4charts.Legend();
+
+}); // end am4core.ready()
+      $('#loader').css("display", "none");
+      $('#chartdiv').css("display", "block");
+    })
+  }
+
+
+
+
+  function makeaddcomplainvisible(){
+    $('#chartdiv').css("display", "none");
+    $('#loader').css("display", "none");
+    $('#pendingpart').css("display", "none");
+    $('#activepart').css("display", "none");
+    $('#resolvedpart').css("display", "none");
+    $('#addComplain').css("display", "block");
+  }
+
+  function makependingvisible(){
+    $('#chartdiv').css("display", "none");
+    $('#addComplain').css("display", "none");
+    $('#loader').css("display", "block");
+    const body = { a: 1 };
+    fetch('/showPending', {
+        method: 'post',
+        body:    JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(function(res){return res.json()})
+    .then(function(data){
+      var torenderhtml="";
+      if(!data.length){
+        torenderhtml="<center><h1>NO COMPLAINS HERE!</h1></center>";
+      }
+      else{
+      for(var i=0;i<data.length;i++){
+         torenderhtml=torenderhtml+"<div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' href='#collapse"+inWords(i+1)+"'>"+data[i]['complain_topic']+"</a><br><b>DATE: </b>"+data[i]['start_date']+"</div><div id='collapse"+inWords(i+1)+"' class='collapse' data-parent='#accordion'><div class='card-body'>"+data[i]['complain']+"</div></div></div>";
+    }}
+      $('#loader').css("display", "none");
+      document.getElementById('pendingpart1').innerHTML=torenderhtml;
+  });
+    $('#pendingpart').css("display", "block");
+    $('#activepart').css("display", "none");
+    $('#chartdiv').css("display", "none");
+    $('#addComplain').css("display", "none");
+    $('#resolvedpart').css("display", "none");
+  }
+  function makeactivevisible(){
+    $('#chartdiv').css("display", "none");
+    $('#addComplain').css("display", "none");
+    $('#loader').css("display", "block");
+    const body = { a: 1 };
+    fetch('/showActive', {
+        method: 'post',
+        body:    JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(function(res){console.log(res);return res.json()})
+    .then(function(data){
+      var torenderhtml="";
+      if(!data.length){
+        torenderhtml="<center><h1>NO COMPLAINS HERE!</h1></center>";
+      }
+      else{
+      for(var i=0;i<data.length;i++){
+         torenderhtml=torenderhtml+"<div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' href='#collapse"+inWords(i+1)+"'>"+data[i]['complain_topic']+"</a><br><br><b>DATE: </b>"+data[i]['start_date']+"</div><div id='collapse"+inWords(i+1)+"' class='collapse' data-parent='#accordion'><div class='card-body'>"+data[i]['complain']+"</div></div></div>";
+    }
+  }
+      $('#loader').css("display", "none");
+      document.getElementById('activepart1').innerHTML=torenderhtml;
+  });
+    $('#pendingpart').css("display", "none");
+    $('#activepart').css("display", "block");
+    $('#chartdiv').css("display", "none");
+    $('#addComplain').css("display", "none");
+    $('#resolvedpart').css("display", "none");
+  }
+  function makeresolvedvisible(){
+    $('#chartdiv').css("display", "none");
+    $('#addComplain').css("display", "none");
+    $('#loader').css("display", "block");
+    const body = { a: 1 };
+    fetch('/showResolved', {
+        method: 'post',
+        body:    JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(function(res){return res.json()})
+    .then(function(data){
+      var torenderhtml="";
+      if(!data.length){
+        torenderhtml="<center><h1>NO COMPLAINS HERE!</h1></center>";
+      }
+      else{
+      for(var i=0;i<data.length;i++){
+         torenderhtml=torenderhtml+"<div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' href='#collapse"+inWords(i+1)+"'>"+data[i]['complain_topic']+"</a>"+"<br><br><b>DATE: </b>"+data[i]['start_date']+"</div><div id='collapse"+inWords(i+1)+"' class='collapse' data-parent='#accordion'><div class='card-body'>"+data[i]['complain']+"<br><b>NAME: </b>"+data[i].name+"<br><b>ENROLLMENT NUMBER: </b>"+data[i].er_no+"</div></div></div>";
+    }
+  }
+      $('#loader').css("display", "none");
+      document.getElementById('resolvedpart1').innerHTML=torenderhtml;
+  });
+    $('#pendingpart').css("display", "none");
+    $('#activepart').css("display", "none");
+    $('#chartdiv').css("display", "none");
+    $('#addComplain').css("display", "none");
+    $('#resolvedpart').css("display", "block");
+  }
+</script>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">LOGO</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <button type="button" class="btn btn-light" onclick="makeaddcomplainvisible()"><b>FILE NEW COMPLAIN🖊️</b></button>&nbsp;
+    <button type="button" class="btn btn-light" onclick="location.reload()"><b>STATS📈</b></button>&nbsp;
+    <button type="button" class="btn btn-light" onclick="makependingvisible()"><b>PENDING COMPLAINS🕐</b></button>&nbsp;
+    <button type="button" class="btn btn-light" onclick="makeactivevisible()"><b>ACTIVE COMPLAINS⚠️</b></button>&nbsp;
+    <button type="button" class="btn btn-light" onclick="makeresolvedvisible()"><b>RESOLVED COMPLAINS✔️</b></button>&nbsp;
+  
+     <div class="dropdown">
+    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+      <b>MORE⚙️</b>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">PROFILE😀</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">CONTACT📲</a>
+      <div class="dropdown-divider"></div>
+      <!--<a class="dropdown-item" href="/buyCoffee">BUY US A COFFEE!😃😃</a>-->
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="/logout">LOGOUT🚪🚶</a>
+    </div>
+  </div>
+  </ul>
+</nav>
+<br>
+  
+<div class="container">
+<div id="loader"style="display: none;">
+<div class="text-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+</div>
+
+<div id="addComplain" style="display: none;">  
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+<br>
+<% if (messages.error) { %>
+      <%= messages.error %>
+<% } %>
+    <form action="/postComplain" method="POST">
+      <input type="text" id="complain_topic" class="fadeIn second" name="complain_topic" placeholder="TOPIC OF COMPLAIN">
+      <input type="text" id="complain" class="fadeIn third" name="complain" placeholder="GIVE ALL POSSIBLE INFORMATION">
+      <input type="submit" class="fadeIn fourth" value="COMPLAIN">
+    </form>
+  </div>
+</div>
+</div>
+
+
+  <div id="pendingpart" style="display: none;">
+  <div id="accordion">
+    <div id="pendingpart1"></div>
+  </div>
+</div>
+
+
+<div id="activepart" style="display: none;">
+  <div id="accordion">
+    <div id="activepart1"></div>
+  </div>
+  </div>
+
+
+
+
+  <div id="resolvedpart" style="display: none;">
+  <div id="accordion">
+    <div id="resolvedpart1"></div>
+  </div>
+  </div>
+
+
+
+
+
+<div id="chartdiv" style="display: block;"></div>
+
+
+</div>
+
+</body>
+</html>
